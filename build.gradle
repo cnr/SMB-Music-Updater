@@ -1,0 +1,10 @@
+
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+compileJava {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}

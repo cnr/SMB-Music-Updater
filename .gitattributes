@@ -1,0 +1,7 @@
+# Text files should be LF
+* text=auto
+
+# Gradle wrapper
+*.bat   text eol=crlf
+gradlew text eol=lf
+*.sh    text eol=lf
