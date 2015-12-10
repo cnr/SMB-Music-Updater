@@ -41,7 +41,8 @@ public class DatExtractor {
         int numFiles = buf.getInt();
         FileMetadata[] fileMetadata = new FileMetadata[numFiles];
         for (int i = 0; i < numFiles; i++) {
-            fileMetadata[i] = new FileMetadata(buf.getInt(), buf.getLong());
+            fileMetadata[i] = new FileMetadata(buf.getInt(), buf.getInt());
+            buf.getInt(); // Discard directory ID
         }
 
         String[] dirNames;
@@ -75,7 +76,7 @@ public class DatExtractor {
             Path filePath = outDirectoryPath.resolve(Paths.get(fileName));
             try (FileChannel out = new FileOutputStream(filePath.toFile()).getChannel()) {
                 buf.position(metadata.offset);
-                buf.limit(buf.position() + (int)metadata.size);
+                buf.limit(buf.position() + metadata.size);
                 out.write(buf);
             }
         }
@@ -83,9 +84,9 @@ public class DatExtractor {
 
     private static final class FileMetadata {
         public final int offset;
-        public final long size;
+        public final int size;
 
-        FileMetadata(int offset, long size) {
+        FileMetadata(int offset, int size) {
             this.offset = offset;
             this.size = size;
         }
