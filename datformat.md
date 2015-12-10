@@ -27,25 +27,26 @@ After the file header, each file's contents are written sequentially into the .d
 
 For each directory:
 
-| Data                                     | Size  |
-| ---------------------------------------- | ----- |
-| Current directory number (0-based index) | `int` |
-| Current file count                       | `int` |
+| Data                                             | Size  |
+| ------------------------------------------------ | ----- |
+| Current directory number (0-based index)         | `int` |
+| Current file count - 1 (minimum 0)               | `int` |
 
 The current file count is determined at the time a directory is found.
 
 For example:
 
 - root
-  - folder1 `count: 0`
+  - folder1 `count: 0 => 0`
     - file1
+  - folder2 `count: 1 => 0`
     - file2
     - file3
   - file4
-  - folder2 `count: 4`
+  - folder3 `count: 4 => 3`
     - file5
     - file6
-  - folder3 `count: 6`
+  - folder4 `count: 5 => 4`
     - file7
   - file8
 
