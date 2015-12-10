@@ -38,7 +38,7 @@ public class Main {
         System.out.println("Unpacked into temporary directory");
     }
 
-    private static void cleanupOnExit(Path dir) throws IOException {
+    private static void cleanupOnExit(Path dir) {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
