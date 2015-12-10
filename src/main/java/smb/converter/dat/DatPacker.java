@@ -70,7 +70,7 @@ public class DatPacker {
             @Override
             public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
                 files.put(file, new FileMetadata((int)Files.size(file)
-                                               , Math.max(0, directoryIdStack.get(0))
+                                               , directoryIdStack.get(0)
                                                , dirInputPath.relativize(file).toString()));
                 foundFiles++;
                 return FileVisitResult.CONTINUE;
