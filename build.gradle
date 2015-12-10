@@ -1,10 +1,15 @@
 
 plugins {
     id 'java'
+    id 'application'
     id 'idea'
 }
 
 compileJava {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
+}
+
+run {
+    main = 'smb.converter.Main'
 }
