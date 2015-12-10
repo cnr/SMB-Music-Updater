@@ -59,10 +59,11 @@ The main implementation traverses directories and files depth-first in alphabeti
 
 For each file:
 
-| Data                                                 | Size   |
-| ---------------------------------------------------- | ------ |
-| Offset of file contents, starting from the beginning | `int`  |
-| File size in bytes                                   | `long` |
+| Data                                                 | Size  |
+| ---------------------------------------------------- | ----- |
+| Offset of file contents, starting from the beginning | `int` |
+| File size in bytes                                   | `int` |
+| Directory ID                                         | `int` |
 
 The header size must be included in the offset calculation.
 
@@ -71,6 +72,15 @@ For example:
 - file0 `offset: <header size>`
 - file1 `offset: <header size> + <file0 size>`
 
+The directory ID is the 0-based index of the directory containing this file.
+
+For example:
+
+- root `id: 0`
+  - folder2 `id: 1`
+    - file2 `id: 1`
+    - file3 `id: 1`
+  - file4 `id: 0`
 
 ---
 
