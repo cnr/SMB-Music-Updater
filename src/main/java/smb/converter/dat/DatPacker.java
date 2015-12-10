@@ -77,23 +77,23 @@ public class DatPacker {
             }
         });
 
-        byte[] directoryBytes = directories.values().stream()
-                                                    .map(metadata -> metadata.relativePathString)
-                                                    .collect(Collectors.joining("\0"))
-                                                    .concat("\0")
-                                                    .getBytes(Charset.forName("UTF8"));
-        byte[] joinedFiles = files.values().stream()
-                                           .map(metadata -> metadata.relativePathString)
-                                           .collect(Collectors.joining("\0"))
-                                           .concat("\0")
-                                           .getBytes(Charset.forName("UTF8"));
+        byte[] dirListingBytes = directories.values().stream()
+                                                     .map(metadata -> metadata.relativePathString)
+                                                     .collect(Collectors.joining("\0"))
+                                                     .concat("\0")
+                                                     .getBytes(Charset.forName("UTF8"));
+        byte[] fileListingBytes = files.values().stream()
+                                                .map(metadata -> metadata.relativePathString)
+                                                .collect(Collectors.joining("\0"))
+                                                .concat("\0")
+                                                .getBytes(Charset.forName("UTF8"));
 
         // --- Header
         ByteBuffer headerBuf = ByteBuffer.allocate(
                 (Integer.BYTES + (directories.size() * Integer.BYTES * 2)) + // Directory count + two ints per directory
                 (Integer.BYTES + (files.size() * (Integer.BYTES + Long.BYTES))) + // File count + one int + one long
-                (Integer.BYTES + directoryBytes.length) + // Length-prefixed directory list
-                (Integer.BYTES + joinedFiles.length) // Length-prefixed file list
+                (Integer.BYTES + dirListingBytes.length) + // Length-prefixed directory list
+                (Integer.BYTES + fileListingBytes.length) // Length-prefixed file list
         ).order(ByteOrder.LITTLE_ENDIAN);
 
         // Write directory header
@@ -119,10 +119,10 @@ public class DatPacker {
         }
 
         // Write directory and file listings
-        headerBuf.putInt(directoryBytes.length)
-                 .putInt(joinedFiles.length)
-                 .put(directoryBytes)
-                 .put(joinedFiles);
+        headerBuf.putInt(dirListingBytes.length)
+                 .putInt(fileListingBytes.length)
+                 .put(dirListingBytes)
+                 .put(fileListingBytes);
 
 
         // --- Data
