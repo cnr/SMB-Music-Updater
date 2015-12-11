@@ -1,13 +1,12 @@
 package smb.converter;
 
+import smb.converter.bandcamp.Bandcamp;
 import smb.converter.dat.DatExtractor;
 import smb.converter.steam.SteamHelper;
 
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
+import java.net.URL;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Optional;
 
@@ -36,6 +35,20 @@ public class Main {
 
         DatExtractor.extract(audioDatPath, tmp.resolve("gameaudio/"));
         System.out.println("Unpacked into temporary directory");
+
+
+        // Download audio files from Bandcamp
+        Path downloadDir = tmp.resolve("downloaded-audio");
+        if (!downloadDir.toFile().mkdir()) {
+            System.err.println("Couldn't create audio download folder");
+            System.exit(1);
+        }
+
+        for (TrackListing listing : TrackListing.values()) {
+            System.out.println("Downloading track: " + listing.name);
+            Bandcamp.download(new URL(listing.url), downloadDir.resolve(listing.pcName)); // Wrong file extension, but that doesn't matter
+        }
+        System.out.println("Downloaded new tracks");
     }
 
     private static void cleanupOnExit(Path dir) {
