@@ -19,7 +19,7 @@ public class SteamHelper {
         }
 
         return Files.list(steamAppsDirectory)
-                    .flatMap(path -> { // Go two user directories
+                    .flatMap(path -> { // Browse user directories
                         try {
                             return Files.list(path);
                         } catch (IOException e) { // Darn checked exceptions ruining this..
