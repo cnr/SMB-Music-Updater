@@ -32,7 +32,7 @@ public class Main {
 
         // Unpack game audio into temporary directory
         Path tmp = Files.createTempDirectory("smb-music-converter");
-        //cleanupOnExit(tmp);
+        cleanupOnExit(tmp);
         System.out.println("Temporary directory: " + tmp.toString());
 
         Path gameaudioDir = tmp.resolve("gameaudio/");
