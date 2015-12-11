@@ -91,7 +91,7 @@ public class DatPacker {
         // --- Header
         ByteBuffer headerBuf = ByteBuffer.allocate(
                 (Integer.BYTES + (directories.size() * Integer.BYTES * 2)) + // Directory count + two ints per directory
-                (Integer.BYTES + (files.size() * (Integer.BYTES + Long.BYTES))) + // File count + one int + one long
+                (Integer.BYTES + (files.size() * Integer.BYTES * 3)) + // File count + three ints per directory
                 (Integer.BYTES + dirListingBytes.length) + // Length-prefixed directory list
                 (Integer.BYTES + fileListingBytes.length) // Length-prefixed file list
         ).order(ByteOrder.LITTLE_ENDIAN);
@@ -132,7 +132,7 @@ public class DatPacker {
             out.write(headerBuf);
             for (Path filePath : files.keySet()) {
                 try (FileChannel in = new FileInputStream(filePath.toFile()).getChannel()) {
-                    in.transferTo(0, in.size(), out);
+                    in.transferTo(0, Integer.MAX_VALUE, out);
                 }
             }
         }
