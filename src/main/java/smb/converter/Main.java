@@ -3,14 +3,12 @@ package smb.converter;
 import smb.converter.audio.AudioConverter;
 import smb.converter.bandcamp.Bandcamp;
 import smb.converter.dat.DatExtractor;
+import smb.converter.dat.DatPacker;
 import smb.converter.steam.SteamHelper;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.SimpleFileVisitor;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.Optional;
 
@@ -61,6 +59,18 @@ public class Main {
             System.out.println("Converting track: " + listing.name);
             AudioConverter.convertAndTrim(downloadDir.resolve(listing.pcName), gameaudioDir.resolve("audio/" + listing.pcName), listing.trimStart, listing.trimEnd);
         }
+        System.out.println("Converted new tracks");
+
+
+        // Pack new audio
+        Path convertedDatPath = tmp.resolve("converted.dat");
+        DatPacker.pack(gameaudioDir, convertedDatPath);
+        System.out.println("Packed new audio");
+
+
+        // Move new gameaudio dat
+        Files.move(convertedDatPath, audioDatPath, StandardCopyOption.REPLACE_EXISTING);
+        System.out.println("Done!");
     }
 
     private static void cleanupOnExit(Path dir) {
