@@ -4,7 +4,7 @@ import smb.converter.audio.AudioConverter;
 import smb.converter.bandcamp.Bandcamp;
 import smb.converter.dat.DatExtractor;
 import smb.converter.dat.DatPacker;
-import smb.converter.steam.SteamHelper;
+import smb.converter.steam.Steam;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,8 +18,10 @@ public class Main {
         // Find Super Meat Boy
         Path audioDatPath;
         {
-            Optional<Path> maybeAudioDatPath = SteamHelper.findGamePath("Super Meat Boy")
-                                                          .flatMap(path -> SteamHelper.findGameFile(path, "gameaudio.dat"));
+            Optional<Path> maybeAudioDatPath = Steam.getSteam()
+                    .flatMap(steam -> steam.getGame("Super Meat Boy"))
+                    .flatMap(smb -> smb.findResource("gameaudio.dat"));
+
             if (!maybeAudioDatPath.isPresent()) {
                 System.err.println("Couldn't find Super Meat Boy game audio");
                 System.exit(1);
