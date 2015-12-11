@@ -21,7 +21,6 @@ public class AudioConverter {
 
         commandStringBuilder.append(" ").append(dest.toAbsolutePath().toString());
 
-        // TODO: check exit code of each conversion
         try {
             if (Runtime.getRuntime().exec(commandStringBuilder.toString()).waitFor() != 0) {
                 throw new IOException("Conversion terminated abnormally: " + source.toString());
