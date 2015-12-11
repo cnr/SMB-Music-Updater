@@ -30,7 +30,7 @@ public enum TrackListing {
     HELL_LIGHT        ("Hell (Light World)"             , "hell.wav"                   , "https://ridiculon.bandcamp.com/track/secret-santana-hell-light"                      , 0, 0),
     HELL_DARK         ("Hell (Dark World)"              , "hardhell.wav"               , "https://ridiculon.bandcamp.com/track/hell-toup-hell-dark"                            , 0, 0),
     HELL_BOSS         ("Little Horn"                    , "boss4.wav"                  , "https://ridiculon.bandcamp.com/track/fasten-your-meatbelts-hell-boss"                , 0, 0),
-    HELL_RETRO        ("Hell (Retro)"                   , "retrohell_music.wav"        , "https://ridiculon.bandcamp.com/track/mintz-meat-hell-retro"                          , 0, 0), // Could also be retrohell.wav
+    HELL_RETRO        ("Hell (Retro)"                   , "retrohell_music.wav"        , "https://ridiculon.bandcamp.com/track/mintz-meat-hell-retro"                          , 0, 0),
 
     RAPTURE_MENU      ("Rapture Menu (Light World)"     , "ch5menu.wav"                , "https://ridiculon.bandcamp.com/track/meat-you-in-hell-rapture-menu-light-dark"       , 0, 0),
     RAPTURE_MENU_DARK ("Rapture Menu (Dark World)"      , "ch5menuhard.wav"            , "https://ridiculon.bandcamp.com/track/meat-you-in-hell-rapture-menu-light-dark"       , 0, 0),
