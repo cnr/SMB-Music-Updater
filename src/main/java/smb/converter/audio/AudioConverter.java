@@ -12,11 +12,11 @@ public class AudioConverter {
                                                                                .append(" -acodec adpcm_ms");
 
         if (trimBegin != 0) {
-            commandStringBuilder.append(" -ss ").append(String.format("%.2f", trimBegin));
+            commandStringBuilder.append(" -ss ").append(String.format("%.3f", trimBegin));
         }
 
         if (trimEnd != 0) {
-            commandStringBuilder.append(" -t ").append(String.format("%.2f", (trimEnd - trimBegin)));
+            commandStringBuilder.append(" -t ").append(String.format("%.3f", (trimEnd - trimBegin)));
         }
 
         commandStringBuilder.append(" ").append(dest.toAbsolutePath().toString());

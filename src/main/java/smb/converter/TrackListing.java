@@ -2,7 +2,7 @@ package smb.converter;
 
 public enum TrackListing {
     TITLE_INTRO       ("Title (Intro)"                  , "intro_music.wav"            , "https://ridiculon.bandcamp.com/track/bologna-pogna-title-intro"                      , 0, 0),
-    TITLE_SCREEN      ("Title Screen"                   , "smbtitleloop.wav"           , "https://ridiculon.bandcamp.com/track/coming-to-a-deli-near-you-title-screen"         , 0, 0),
+    WORLD_OVERVIEW    ("World Overview"                 , "smbworldloop.wav"           , "https://ridiculon.bandcamp.com/track/coming-to-a-deli-near-you-title-screen"         , 30.892, 58.322),
 
     FOREST_MENU       ("Forest Menu (Light World)"      , "forestmenuloop.wav"         , "https://ridiculon.bandcamp.com/track/gristletoe-forest-menu-light-dark"              , 0, 0),
     FOREST_MENU_DARK  ("Forest Menu (Dark World)"       , "evilforestmenuloop.wav"     , "https://ridiculon.bandcamp.com/track/gristletoe-forest-menu-light-dark"              , 0, 0),
