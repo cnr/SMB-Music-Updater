@@ -11,14 +11,16 @@ After the file header, each file's contents are written sequentially into the .d
 
 ### Header
 
-| Data                    | Size        |
-| ----------------------- | ----------- |
-| Directory count (total) | `long`      |
-| Directory metadata      | (see below) |
-| File count (total)      | `long`      |
-| File metadata           | (see below) |
-| Directory names         | (see below) |
-| File names              | (see below) |
+| Data                     | Size        |
+| ------------------------ | ----------- |
+| Directory count (total)  | `long`      |
+| Directory metadata       | (see below) |
+| File count (total)       | `long`      |
+| File metadata            | (see below) |
+| Length(Directory string) | (see below) |
+| Length(File string)      | (see below) |
+| Directory string         | (see below) |
+| File string              | (see below) |
 
 
 ---
@@ -84,6 +86,6 @@ For example:
 
 ---
 
-#### Directory and file names
+#### Directory and file strings
 
-Directory and file names are joined with a `NUL` delimiter, and the resulting strings are written with an `int` length prefix. You may (must?) include a trailing `\0` byte in the string.
+The list of directory and file names are joined with a `NUL` delimiter. You may (must?) include a trailing `NUL` byte at the end.
